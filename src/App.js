@@ -16,7 +16,7 @@ import Distancia from './Images/distance.png'
 
 function App() {
 
-  const [ country, setCountry ] = useState('World')
+  const [ country, setCountry ] = useState('')
   
   const [ dataCountry, setDataCountry ] = useState([])
 
@@ -24,7 +24,12 @@ function App() {
 
   const countrySelect = dataCountry.find( search => search.country === country )
 
-  console.log(countrySelect)
+  const colorize = (...args) => ({
+    cyan: `\x1b[36m${args.join(' ')}`,
+    bgRed: `\x1b[41m${args.join(' ')}\x1b[0m`,
+  })
+
+  console.log(colorize(colorize("José Eduardo Álvarez L. | Front-End developer </>").cyan).bgRed);
 
   return (
     
@@ -33,7 +38,7 @@ function App() {
       {preload
         ? <p>Cargando...</p>
         :
-        <>
+        <div className="animate-opacity">
           <Header 
             country={country}
             dataCountry={dataCountry}
@@ -58,10 +63,10 @@ function App() {
 
                 <div className="container-fluid mt-5">
                   <h1 className="text-center mb-0">
-                    Tabla Mundial <span role="img" aria-label="mundo">🌎</span>
+                    Tabla Mundial <p className="rotate"><span role="img" aria-label="mundo">🌎</span></p>
                   </h1>
 
-                  <div className="container-fluid shadow p-0">
+                  <div className="container-fluid mt-4 shadow p-0">
                     <Table dataCountry={dataCountry} />
                   </div>
                 </div>
@@ -83,7 +88,7 @@ function App() {
 
           }
 
-        </>
+        </div>
       }
 
     </>

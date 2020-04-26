@@ -22,8 +22,8 @@ h1{
 .shadow-i{
     border-radius: 50px !important;
     background: #ffffff !important;
-    box-shadow: 12px 12px 30px #858585, 
-    -12px -12px 30px #ffffff !important;
+    box-shadow: 10px 10px 20px #666666, 
+    -10px -10px 20px #ffffff !important;
 }
 
 .casos-totales{
@@ -47,3 +47,22 @@ h1{
 .pruebas{
     background: #2d132c !important;
 }
+
+.container-fluid, .animate-opacity{
+    animation: opacidad 1s alternate;
+}
+
+@keyframes opacidad{
+    from {opacity: 0;}
+    to{opacity: 1;}
+}
+
+.rotate{
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

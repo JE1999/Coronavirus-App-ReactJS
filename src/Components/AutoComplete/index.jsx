@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -13,11 +14,18 @@ export default function FreeSolo({country, dataCountry, setCountry, setDataCount
             try {
                 setPreload(true)
                 const request = await axios.get("https://coronavirus-19-api.herokuapp.com/countries")
-                console.log(request.data)
                 setDataCountry(request.data)
+                setCountry("World")
                 
             } catch (error) {
                 console.log(error.response)
+                setCountry("")
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ha ocurrido un error al conectar con la base de datos!',
+                })
 
             }
 
@@ -27,12 +35,12 @@ export default function FreeSolo({country, dataCountry, setCountry, setDataCount
         setPreload(false)
 
 
-    },[setPreload, setDataCountry])
+    },[setPreload, setDataCountry, setCountry])
 
     return (
         <div className="mx-auto text-center col-sm-12 col-md-8 col-lg-6 mt-3">
 
-            <p className="m-0 text-color">Buscar algun país... <span role="img" aria-label="img">🦠</span></p>
+            <p className="m-0 text-color">Buscar algun país...</p>
             
             <Autocomplete
                 freeSolo

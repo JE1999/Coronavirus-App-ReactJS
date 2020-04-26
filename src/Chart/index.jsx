@@ -2,10 +2,15 @@ import React, { Fragment } from 'react'
 import { Bar } from 'react-chartjs-2'
 import numeral from 'numeral'
 
-export default function ChartOne({countrySelect}){
+export default function ({countrySelect}){
 
   const chartData = {
-    labels: ['Totales', 'Activos', 'Muertes', 'Recuperados'],
+    labels: [
+      "Totales",
+      'Activos', 
+      'Muertes', 
+      'Recuperados'
+    ],
     datasets:[
       {
         data:[
@@ -51,7 +56,7 @@ export default function ChartOne({countrySelect}){
           tooltips: {
             callbacks: {
               label: function(tooltipItem, data) {
-                return numeral(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).format('0,0');
+                return numeral(data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]).format('0,0')
               },
             },
           },
@@ -60,15 +65,13 @@ export default function ChartOne({countrySelect}){
             duration: '5000'
           },
           scales: {
-            yAxes: [
-               {
-                   ticks: {
-                       callback: function(label, index, labels) {
-                           return new Intl.NumberFormat('en-US').format(label/1000);
-                       }
-                   }
-               }
-           ]
+            yAxes: [{
+              ticks: {
+                callback: function(label, index, labels) {
+                  return new Intl.NumberFormat('en-US').format(label)
+                }
+              }
+            }]
           }
         }}
       />
