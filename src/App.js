@@ -63,7 +63,7 @@ function App() {
 
                 <div className="container-fluid mt-5">
                   <h1 className="text-center mb-0">
-                    Tabla Mundial <p className="rotate"><span role="img" aria-label="mundo">🌎</span></p>
+                    Mundial <p className="rotate"><span role="img" aria-label="mundo">🌎</span></p>
                   </h1>
 
                   <div className="container-fluid mt-4 shadow p-0">
