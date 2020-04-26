@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaina+2:wght@600&display=swap');
+body{
+    font-family: 'Baloo Bhaina 2', cursive !important;
+}
+
+h1{
+    font-size: 60px !important;
+}
+
+.roundedd{
+    border-radius: 50px !important;
+}
+
+.text-color{
+    color: #ececec !important;
+}
+
+.color-primary{
+    background: #3f51b5 !important;
+}
+
+.shadow-i{
+    border-radius: 50px !important;
+    background: #ffffff !important;
+    box-shadow: 12px 12px 30px #858585, 
+    -12px -12px 30px #ffffff !important;
+}
+
+.casos-totales{
+    background: #142850 !important;
+}
+.casos-activos{
+    background: #fa744f !important;
+}
+.total-muertes{
+    background: #c81912 !important;
+}
+.casos-hoy{
+    background: #ffa41b !important;
+}
+.muertes-hoy{
+    background: #4d089a !important;
+}
+.recuperados{
+    background: #015668 !important;
+}
+.pruebas{
+    background: #2d132c !important;
+}
