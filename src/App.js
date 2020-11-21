@@ -1,97 +1,59 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 //Components
-import Header from './Components/Header'
-import CardDataCountry from './Components/CardDataCountry'
-import SvgChart from './Components/Svg/SvgChart'
-import SvgBottom from './Components/Svg/SvgBottom'
-import Table from './Components/Table'
+import {Header} from './Components/Header'
+import {Card} from './Components/CardDataCountry'
+import { ContentGraphics } from './Components/ContentGraphics'
+import { World } from './Components/World'
+import {Footer} from './Components/Footer'
 
-//Chart
-import Chart from './Chart'
-
-//Images
-import Distancia from './Images/distance.png'
-
+import { useFetch } from './hooks/useFetch'
+import { COUNTRIES } from './Types/api'
 
 function App() {
 
   const [ country, setCountry ] = useState('')
-  
-  const [ dataCountry, setDataCountry ] = useState([])
 
-  const [ preload, setPreload ] = useState(false)
+  const state = useFetch(COUNTRIES) 
 
-  const countrySelect = dataCountry.find( search => search.country === country )
+  const countrySelect = useMemo(() => state.data.find( search => search.country === country ), [country, state.data])
 
   const colorize = (...args) => ({
     cyan: `\x1b[36m${args.join(' ')}`,
-    bgRed: `\x1b[41m${args.join(' ')}\x1b[0m`,
   })
 
-  console.log(colorize(colorize("José Eduardo Álvarez L. | Front-End developer </>").cyan).bgRed);
+  console.log(colorize("José Eduardo Álvarez L. | Front-End developer </>").cyan);
 
   return (
-    
-    <>
-    
-      {preload
-        ? <p>Cargando...</p>
-        :
+    state.loading
+      ? <h1 className="mt-5 pt-5 text-center">Cargando...</h1>
+      :
         <div className="animate-opacity">
           <Header 
             country={country}
-            dataCountry={dataCountry}
-            setCountry={setCountry} 
-            setDataCountry={setDataCountry} 
-            setPreload={setPreload}
+            dataCountry={state?.data}
+            setCountry={setCountry}
+            error={state.error}
           />
 
-          {countrySelect
-            ?
-              <>
-              
-                <CardDataCountry countrySelect={countrySelect} />
+          <div style={{paddingTop: '125px'}} className="container">
+            {countrySelect
+              ?
+                <>
+                  <Card countrySelect={countrySelect} />
 
-                <div className="container-fluid mt-5">
-                  <h1 className="text-center mb-0">Gráfico</h1>
-                  <div className="text-center">
-                    <SvgChart/>
-                  </div>
-                  <Chart countrySelect={countrySelect} />
-                </div>
+                  <ContentGraphics countrySelect={countrySelect} />
 
-                <div className="container-fluid mt-5">
-                  <h1 className="text-center mb-0">
-                    Mundial <p className="rotate"><span role="img" aria-label="mundo">🌎</span></p>
-                  </h1>
+                  <World data={state.data} />
+                </>
+              : <h1 className="text-center">Sin resultados...</h1>
 
-                  <div className="container-fluid mt-4 shadow p-0">
-                    <Table dataCountry={dataCountry} />
-                  </div>
-                </div>
+            }
+          </div>
 
-                <SvgBottom/>
-
-                <div className="color-primary">
-                  <h4 className="m-0 pb-3 text-center text-white">
-                    Desarrollado por: José Eduardo Álvarez L. 
-                    <img src={Distancia} className="img-fluid" width="40" alt="imagen distancia" />
-                  </h4>
-                </div>
-              
-              </>
-            : 
-              <div style={{paddingTop: '125px'}} className="container">
-                <h1 className="text-center">Sin resultados...</h1>
-              </div>
-
-          }
+          {countrySelect && <Footer />}
 
         </div>
-      }
-
-    </>
   )
 }
 

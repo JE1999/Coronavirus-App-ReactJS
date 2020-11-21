@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function StickyHeadTable({dataCountry}) {
+export const TableContent = memo(({dataCountry}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -111,4 +111,4 @@ export default function StickyHeadTable({dataCountry}) {
       />
     </Paper>
   );
-}
+})

@@ -48,7 +48,7 @@ h1{
     background: #2d132c !important;
 }
 
-.container-fluid, .animate-opacity{
+.container, .animate-opacity{
     animation: opacidad 1s alternate;
 }
 

@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { memo } from 'react'
 import { Bar } from 'react-chartjs-2'
 import numeral from 'numeral'
 
-export default function ({countrySelect}){
+export const Chart = memo(({countrySelect}) => {
 
   const chartData = {
     labels: [
@@ -38,8 +38,7 @@ export default function ({countrySelect}){
   
 
   return(
-
-    <Fragment>
+    <>
 
       <Bar
         data={chartData}
@@ -48,7 +47,7 @@ export default function ({countrySelect}){
           title: {
             display: true,
             text: countrySelect.country,
-            fontSize: 30
+            fontSize: 20
           },
           legend: {
             display: false,
@@ -76,8 +75,7 @@ export default function ({countrySelect}){
         }}
       />
 
-    </Fragment>
-
+    </>
   )
 
-}
+})
